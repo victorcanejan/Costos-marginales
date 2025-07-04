@@ -26,7 +26,25 @@ Estructura de la base:
 
 Modelo seleccionado:
 
-Se usará regresión lineal múltiple, ya que permite analizar la relación entre el costo marginal y los distintos tipos de generación eléctrica. Este modelo fue elegido por su simplicidad, buena interpretación de resultados y bajo costo computacional.
+Se usará regresión lineal múltiple, ya que permite analizar la relación entre distintas variables. Nos interesa analizar: 
+
+- ¿Podemos asociar el costo margianl a al tipo de generación? ¿Qué tipo de generación está asociado a mayores o menores costos?
+  x = precio marginal de una barra  y = tipo de generación
+
+- ¿Hay patrones horarios? ¿El costo es más alto en horas punta?
+  x = periodo  y = costo marginal
+
+- ¿Los cambios bruscos se relacionan con ciertos tipos de generación entrando o saliendo del sistema?
+  x = variación del costo marginal (∆ costo marginal) y = tipo de generación predominante
+
+- ¿El comportamiento es distinto los fines de semana?
+  x = día de la semana  y = costo marginal
+  
+- ¿Hay zonas del sistema donde el costo marginal es más alto?
+  x = nombre de la barra (ubicación)  y = costo marginal
+
+
+ Este modelo fue elegido por su simplicidad, buena interpretación de resultados y bajo costo computacional.
 
 ## Estrategia de evaluación
 
