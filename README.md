@@ -1,34 +1,39 @@
 # Proyecto: Predicción del Costo Marginal en el Sistema Eléctrico Chileno
 
-Estudiantes: Fernando Sepúlveda - Víctor Canejan
+**Estudiantes**: Fernando Sepúlveda - Víctor Canejan
 
 ## Definición del problema
 
-El sistema eléctrico chileno opera bajo un modelo de mercado en el que los costos marginales representan el precio de generar una unidad adicional de energía. Estos costos varían cada 15 minutos y están influenciados por factores como el tipo de generación, la hora, el clima y la cantidad de energía inyectada al sistema.
+El sistema eléctrico chileno opera bajo un modelo marginalista donde el **costo marginal** refleja el precio de generar una unidad adicional de energía en un nodo específico del sistema. Estos valores se calculan cada 15 minutos y dependen de múltiples factores, como el tipo de generación, la hora, el clima y la cantidad de energía inyectada al sistema.
 
-El objetivo de este proyecto es predecir el costo marginal del sistema eléctrico utilizando como variables los datos de generación eléctrica por tipo de fuente. Una predicción precisa permitiría anticipar variaciones de precio y apoyar decisiones operativas y comerciales.
+El objetivo de este proyecto es **predecir el costo marginal** de una barra del sistema eléctrico en un instante dado, utilizando como variables los datos de generación eléctrica por tipo de fuente.
 
-## Plan de acción
+Una predicción precisa permitiría anticipar variaciones de precio, facilitar la toma de decisiones operativas y evaluar estrategias de planificación energética.
 
-Descripción del dataset:
+## Descripción del dataset
 
-El dataset fue creado a partir de información del Coordinador Eléctrico Nacional de Chile. Contiene datos del costo marginal cada 15 minutos, el nombre de la barra y el tipo de generación (hidráulica, solar, térmica, eólica, entre otras).
+El dataset fue construido a partir de información publicada por el **Coordinaro Eléctrico Nacional de Chile**, y estructurado mediante una base de datos relacional mantenida por la empresa **Antumanque Consultores**, a la cual se accedió para el desarrollo de este proyecto.
 
-Estructura de la base:
+Cada registro corresponde a una observación en un intervalo de 15 minutos e incluye las siguientes variables:
 
-- periodo
-- día
-- hora
-- minuto
-- nombre de la barra
-- tipo de generación
-- valor del costo marginal
+- `periodo`: año y mes del dato (formato `AAAA-MM-01`)
+- `día`: día del mes
+- `hora`: hora del día (0 a 23)
+- `minuto`: minuto del intervalo (0, 15, 30, 45)
+- `nombre_barra`: nombre de la barra eléctrica
+- `generacion_kwh`: energía generada en esa barra en el intervalo (kWh)
+- `cmg_peso_kwh`: costo marginal de esa barra en ese instante ($/kWh)
+- `tipo_gen`: Etiqueta que clasifica según el tipo de central que está generando en esa barra en ese instante
 
-Modelo seleccionado:
+Este dataset representa una vista concentrada del comportamiento horario del sistema eléctrico y permite correlacionar variables operacionales con el costo marginal observado.
 
-Se usará regresión lineal múltiple, ya que permite analizar la relación entre distintas variables. Nos interesa analizar: 
+## Modelo seleccionado:
 
-- ¿Podemos asociar el costo margianl a al tipo de generación? ¿Qué tipo de generación está asociado a mayores o menores costos?
+Se aplicará un enfoque de **regresión supervisada**, comenzando con **regresión lineal múltiple** para establecer una línea base. Posteriormente se evaluará el desempeño de modelos más complejos como **KNN** y **Random Forest**, con el objetivo de capturar posibles no linealidades en los datos.
+
+Preguntas guías para el análisis:
+
+- ¿Podemos asociar el costo margianl al tipo de generación? ¿Qué tipo de generación está asociado a mayores o menores costos?
   x = precio marginal de una barra  y = tipo de generación
 
 - ¿Hay patrones horarios? ¿El costo es más alto en horas punta?
@@ -43,15 +48,18 @@ Se usará regresión lineal múltiple, ya que permite analizar la relación entr
 - ¿Hay zonas del sistema donde el costo marginal es más alto?
   x = nombre de la barra (ubicación)  y = costo marginal
 
-
- Este modelo fue elegido por su simplicidad, buena interpretación de resultados y bajo costo computacional.
+> El uso de regresión lineal permite una interpretación directa de la influencia de cada variable y un bajo costo computacional, ideal para una primera aproximación al problema.
 
 ## Estrategia de evaluación
 
-Las métricas que se utilizarán para evaluar el modelo son:
+Se utilizarán las siguientes métricas de desempeño para evaluar los modelos:
 
-- MAE (Mean Absolute Error)
-- RMSE (Root Mean Squared Error)
-- R² (Coeficiente de determinación)
+- **MAE** (Mean Absolute Error)
+- **RMSE** (Root Mean Squared Error)
+- **R²** (Coeficiente de determinación)
 
-La división entre entrenamiento y prueba respetará el orden temporal de los datos.
+Además, se mantendrá una separación temporal entre datos de entrenamiento y prueba, evitando el uso de validación aleatoria, con el fin de simular un escenario real de predicción futura basada en datos históricos.
+
+---
+
+*Este proyecto representa una aplicación práctica de análisis predictivo en el contexto del mercado eléctrico chileno, con base en datos abiertos y una problemática de alto impacto operativo y económico.*
