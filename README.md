@@ -60,6 +60,15 @@ Se utilizarán las siguientes métricas de desempeño para evaluar los modelos:
 
 Además, se mantendrá una separación temporal entre datos de entrenamiento y prueba, evitando el uso de validación aleatoria, con el fin de simular un escenario real de predicción futura basada en datos históricos.
 
+## Datos
+
+Este repositorio utiliza un archivo de datos CSV que no está incluido directamente por su gran tamaño (1.2 GB).
+
+Puedes descargarlo desde el siguiente enlace:
+
+[Descargar cmg_gen_barra.csv desde Google Drive](https://drive.google.com/file/d/12zpRUrAQpB0F_ImRnaWG7Qui3_kEM61p/view?usp=drive_link)
+
+Una vez descargado, colócalo en la raíz del proyecto (misma carpeta que este README).
 ---
 
 *Este proyecto representa una aplicación práctica de análisis predictivo en el contexto del mercado eléctrico chileno, con base en datos abiertos y una problemática de alto impacto operativo y económico.*
