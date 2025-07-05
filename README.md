@@ -69,6 +69,7 @@ Puedes descargarlo desde el siguiente enlace:
 [Descargar cmg_gen_barra.csv desde Google Drive](https://drive.google.com/file/d/12zpRUrAQpB0F_ImRnaWG7Qui3_kEM61p/view?usp=drive_link)
 
 Una vez descargado, colócalo en la raíz del proyecto (misma carpeta que este README).
+
 ---
 
 *Este proyecto representa una aplicación práctica de análisis predictivo en el contexto del mercado eléctrico chileno, con base en datos abiertos y una problemática de alto impacto operativo y económico.*
