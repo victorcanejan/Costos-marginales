@@ -29,7 +29,7 @@ Este dataset representa una vista concentrada del comportamiento horario del sis
 
 ## Modelo seleccionado:
 
-Se aplicará un enfoque de **regresión supervisada**, comenzando con **regresión lineal múltiple** para establecer una línea base. Posteriormente se evaluará el desempeño de modelos más complejos como **KNN** y **Random Forest**, con el objetivo de capturar posibles no linealidades en los datos.
+Se aplicará un enfoque de **regresión supervisada**, comenzando con una **regresión lineal múltiple** para establecer una línea base. Posteriormente se evaluará el desempeño de modelos más complejos como **KNN** y **Random Forest**, con el objetivo de capturar posibles no linealidades en los datos.
 
 Preguntas guías para el análisis:
 
