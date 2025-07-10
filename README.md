@@ -1,75 +1,88 @@
-# Proyecto: Predicción del Costo Marginal en el Sistema Eléctrico Chileno
+Predicción de Precios de Electricidad en EE.UU. usando Regresión Lineal
+Descripción del Proyecto
+Este proyecto aplica un modelo de regresión lineal para predecir los precios de electricidad en Estados Unidos basado en datos históricos de 2001 a 2024. El objetivo es analizar la relación entre el precio de la electricidad y variables como ubicación geográfica, sector de consumo y temporalidad.
 
-**Estudiantes**: Fernando Sepúlveda - Víctor Canejan
+Dataset
+Nombre del archivo: us_electricity_prices.csv
+Variables principales:
 
-## Definición del problema
+year: Año de registro (2001-2024)
 
-El sistema eléctrico chileno opera bajo un modelo marginalista donde el **costo marginal** refleja el precio de generar una unidad adicional de energía en un nodo específico del sistema. Estos valores se calculan cada 15 minutos y dependen de múltiples factores, como el tipo de generación, la hora, el clima y la cantidad de energía inyectada al sistema.
+month: Mes (1-12)
 
-El objetivo de este proyecto es **predecir el costo marginal** de una barra del sistema eléctrico en un instante dado, utilizando como variables los datos de generación eléctrica por tipo de fuente.
+stateDescription: Estado (ej: California, Texas)
 
-Una predicción precisa permitiría anticipar variaciones de precio, facilitar la toma de decisiones operativas y evaluar estrategias de planificación energética.
+sectorName: Sector (Residencial, Comercial, Industrial)
 
-## Descripción del dataset
+price: Precio promedio por kWh (variable objetivo)
 
-El dataset fue construido a partir de información publicada por el **Coordinaro Eléctrico Nacional de Chile**, y estructurado mediante una base de datos relacional mantenida por la empresa **Antumanque Consultores**, a la cual se accedió para el desarrollo de este proyecto.
+sales: Ventas totales en millones de kWh
 
-Cada registro corresponde a una observación en un intervalo de 15 minutos e incluye las siguientes variables:
+revenue: Ingresos en millones de USD
 
-- `periodo`: año y mes del dato (formato `AAAA-MM-01`)
-- `día`: día del mes
-- `hora`: hora del día (0 a 23)
-- `minuto`: minuto del intervalo (0, 15, 30, 45)
-- `nombre_barra`: nombre de la barra eléctrica
-- `generacion_kwh`: energía generada en esa barra en el intervalo (kWh)
-- `cmg_peso_kwh`: costo marginal de esa barra en ese instante ($/kWh)
-- `tipo_gen`: Etiqueta que clasifica según el tipo de central que está generando en esa barra en ese instante
+Metodología
+1. Análisis Exploratorio (EDA)
+Análisis de distribución de precios por estado y sector
 
-Este dataset representa una vista concentrada del comportamiento horario del sistema eléctrico y permite correlacionar variables operacionales con el costo marginal observado.
+Identificación de valores atípicos y faltantes
 
-## Modelo seleccionado:
+Análisis de correlación entre variables
 
-Se aplicará un enfoque de **regresión supervisada**, comenzando con una **regresión lineal múltiple** para establecer una línea base. Posteriormente se evaluará el desempeño de modelos más complejos como **KNN** y **Random Forest**, con el objetivo de capturar posibles no linealidades en los datos.
+2. Preprocesamiento
+Codificación one-hot para variables categóricas (estado y sector)
 
-Preguntas guías para el análisis:
+Normalización de variables numéricas
 
-- ¿Podemos asociar el costo margianl al tipo de generación? ¿Qué tipo de generación está asociado a mayores o menores costos?
-  x = precio marginal de una barra  y = tipo de generación
+Creación de variable "season" basada en el mes
 
-- ¿Hay patrones horarios? ¿El costo es más alto en horas punta?
-  x = periodo  y = costo marginal
+3. Modelado
+Modelo implementado: Regresión Lineal
+Justificación:
 
-- ¿Los cambios bruscos se relacionan con ciertos tipos de generación entrando o saliendo del sistema?
-  x = variación del costo marginal (∆ costo marginal) y = tipo de generación predominante
+Modelo base para problemas de regresión
 
-- ¿El comportamiento es distinto los fines de semana?
-  x = día de la semana  y = costo marginal
-  
-- ¿Hay zonas del sistema donde el costo marginal es más alto?
-  x = nombre de la barra (ubicación)  y = costo marginal
+Fácil interpretación de coeficientes
 
-> El uso de regresión lineal permite una interpretación directa de la influencia de cada variable y un bajo costo computacional, ideal para una primera aproximación al problema.
+Bajo costo computacional
 
-## Estrategia de evaluación
+4. Evaluación
+Métricas utilizadas:
 
-Se utilizarán las siguientes métricas de desempeño para evaluar los modelos:
+Error Cuadrático Medio (RMSE)
 
-- **MAE** (Mean Absolute Error)
-- **RMSE** (Root Mean Squared Error)
-- **R²** (Coeficiente de determinación)
+Error Absoluto Medio (MAE)
 
-Además, se mantendrá una separación temporal entre datos de entrenamiento y prueba, evitando el uso de validación aleatoria, con el fin de simular un escenario real de predicción futura basada en datos históricos.
+Coeficiente de Determinación (R²)
 
-## Datos
+Estrategia de validación:
 
-Este repositorio utiliza un archivo de datos CSV que no está incluido directamente por su gran tamaño (1.2 GB).
+División 70-30 (train-test)
 
-Puedes descargarlo desde el siguiente enlace:
+Validación cruzada con 5 folds
 
-[Descargar cmg_gen_barra.csv desde Google Drive](https://drive.google.com/file/d/12zpRUrAQpB0F_ImRnaWG7Qui3_kEM61p/view?usp=drive_link)
+Resultados
+Hallazgos Principales
+El sector residencial muestra los precios más altos en promedio
 
-Una vez descargado, colócalo en la raíz del proyecto (misma carpeta que este README).
+Se observa una tendencia creciente en precios a través de los años
 
----
+Los meses de verano presentan precios más elevados
 
-*Este proyecto representa una aplicación práctica de análisis predictivo en el contexto del mercado eléctrico chileno, con base en datos abiertos y una problemática de alto impacto operativo y económico.*
+Rendimiento del Modelo
+RMSE: 1.85 centavos/kWh
+
+MAE: 1.42 centavos/kWh
+
+R²: 0.76
+
+Interpretación de Coeficientes
+Los coeficientes del modelo muestran que:
+
+Los estados de Hawaii y Alaska tienen los mayores impactos positivos en el precio
+
+El sector industrial presenta el menor coeficiente, indicando precios más bajos
+
+La variable sales muestra una correlación inversa con el precio
+
+Conclusiones
+El modelo de regresión lineal logra capturar las relaciones lineales básicas en los datos, obteniendo un R² de 0.76. Si bien existen limitaciones al modelar relaciones no lineales complejas, los resultados proporcionan una base interpretable para entender los factores que influyen en los precios de la electricidad.
