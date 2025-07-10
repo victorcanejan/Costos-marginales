@@ -1,88 +1,53 @@
-Predicción de Precios de Electricidad en EE.UU. usando Regresión Lineal
-Descripción del Proyecto
-Este proyecto aplica un modelo de regresión lineal para predecir los precios de electricidad en Estados Unidos basado en datos históricos de 2001 a 2024. El objetivo es analizar la relación entre el precio de la electricidad y variables como ubicación geográfica, sector de consumo y temporalidad.
+# Proyecto de Predicción de Precios de Electricidad en EE.UU.
 
-Dataset
-Nombre del archivo: us_electricity_prices.csv
-Variables principales:
+## Descripción
+Este proyecto implementa un modelo de regresión lineal para predecir precios de electricidad utilizando datos históricos de EE.UU. (2001-2024). El análisis incluye EDA, preprocesamiento y evaluación del modelo.
 
-year: Año de registro (2001-2024)
+## Dataset
+**Archivo:** `us_electricity_prices.csv`  
+**Variables relevantes:**
+- `year`, `month`: Variables temporales
+- `stateDescription`: Estado (categórica)
+- `sectorName`: Sector de consumo (categórica) 
+- `price`: Variable objetivo (precio por kWh)
+- `sales`, `revenue`: Variables numéricas
 
-month: Mes (1-12)
+## Metodología
 
-stateDescription: Estado (ej: California, Texas)
+### 1. Análisis Exploratorio
+- Distribución de precios por estado y sector
+- Análisis de valores faltantes y atípicos
+- Matriz de correlación entre variables
 
-sectorName: Sector (Residencial, Comercial, Industrial)
+### 2. Preprocesamiento
+- Codificación one-hot para variables categóricas
+- Creación de variable estacional (verano/invierno)
+- Normalización de features numéricas
 
-price: Precio promedio por kWh (variable objetivo)
+### 3. Modelado
+**Algoritmo:** Regresión Lineal  
+**Validación:** 
+- Split 70-30 (train-test)
+- 5-fold cross validation
 
-sales: Ventas totales en millones de kWh
+## Resultados
 
-revenue: Ingresos en millones de USD
+### Métricas de Rendimiento
+| Métrica | Valor |
+|---------|-------|
+| RMSE | 1.85 |
+| MAE | 1.42 |
+| R² | 0.76 |
 
-Metodología
-1. Análisis Exploratorio (EDA)
-Análisis de distribución de precios por estado y sector
+### Hallazgos Clave
+- Coeficiente positivo para meses de verano (+0.15)
+- Sector residencial con mayor impacto en precio
+- Hawaii muestra el coeficiente estatal más alto
 
-Identificación de valores atípicos y faltantes
+## Conclusiones
+El modelo de regresión lineal explica el 76% de la varianza en los precios (R²=0.76). Los resultados muestran patrones esperados como precios más altos en verano y variaciones significativas entre estados.
 
-Análisis de correlación entre variables
-
-2. Preprocesamiento
-Codificación one-hot para variables categóricas (estado y sector)
-
-Normalización de variables numéricas
-
-Creación de variable "season" basada en el mes
-
-3. Modelado
-Modelo implementado: Regresión Lineal
-Justificación:
-
-Modelo base para problemas de regresión
-
-Fácil interpretación de coeficientes
-
-Bajo costo computacional
-
-4. Evaluación
-Métricas utilizadas:
-
-Error Cuadrático Medio (RMSE)
-
-Error Absoluto Medio (MAE)
-
-Coeficiente de Determinación (R²)
-
-Estrategia de validación:
-
-División 70-30 (train-test)
-
-Validación cruzada con 5 folds
-
-Resultados
-Hallazgos Principales
-El sector residencial muestra los precios más altos en promedio
-
-Se observa una tendencia creciente en precios a través de los años
-
-Los meses de verano presentan precios más elevados
-
-Rendimiento del Modelo
-RMSE: 1.85 centavos/kWh
-
-MAE: 1.42 centavos/kWh
-
-R²: 0.76
-
-Interpretación de Coeficientes
-Los coeficientes del modelo muestran que:
-
-Los estados de Hawaii y Alaska tienen los mayores impactos positivos en el precio
-
-El sector industrial presenta el menor coeficiente, indicando precios más bajos
-
-La variable sales muestra una correlación inversa con el precio
-
-Conclusiones
-El modelo de regresión lineal logra capturar las relaciones lineales básicas en los datos, obteniendo un R² de 0.76. Si bien existen limitaciones al modelar relaciones no lineales complejas, los resultados proporcionan una base interpretable para entender los factores que influyen en los precios de la electricidad.
+## Ejecución
+```bash
+pip install -r requirements.txt
+jupyter notebook analysis.ipynb
