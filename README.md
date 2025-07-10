@@ -1,4 +1,5 @@
 # Proyecto de Predicción de Precios de Electricidad en EE.UU.
+## Estudiantes: Fernando Sepúlveda - Víctor Canejan
 
 ## Descripción
 Este proyecto implementa un modelo de regresión lineal para predecir precios de electricidad utilizando datos históricos de EE.UU. (2001-2024). El análisis incluye EDA, preprocesamiento y evaluación del modelo.
