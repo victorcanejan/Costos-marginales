@@ -1,14 +1,14 @@
-# Proyecto: Predicción del Costo Marginal en el Sistema Eléctrico Chileno
+# Proyecto: Clasificación del Tipo de Generación en el Sistema Eléctrico Chileno basado en Costo Marginal
 
 **Estudiantes**: Fernando Sepúlveda - Víctor Canejan
 
 ## Definición del problema
 
-El sistema eléctrico chileno opera bajo un modelo marginalista donde el **costo marginal** refleja el precio de generar una unidad adicional de energía en un nodo específico del sistema. Estos valores se calculan cada 15 minutos y dependen de múltiples factores, como el tipo de generación, la hora, el clima y la cantidad de energía inyectada al sistema.
+El sistema eléctrico chileno opera bajo un modelo marginalista donde el **costo marginal** refleja el precio de generar una unidad adicional de energía en un nodo específico del sistema. Estos valores se calculan cada 15 minutos y están estrechamente relacionados con el tipo de generación que está operando en cada instante.
 
-El objetivo de este proyecto es **predecir el costo marginal** de una barra del sistema eléctrico en un instante dado, utilizando como variables los datos de generación eléctrica por tipo de fuente.
+El objetivo de este proyecto es **clasificar el tipo de generación eléctrica** `tipo_gen` que está operando en una barra específica en un momento dado, utilizando como principal variable predictora el costo marginal `cmg_peso_kwh` junto con otras características operacionales y temporales.
 
-Una predicción precisa permitiría anticipar variaciones de precio, facilitar la toma de decisiones operativas y evaluar estrategias de planificación energética.
+Esta clasificación permitiría identificar patrones de operación de las centrales eléctricas, entender qué tecnologías están fijando el precio marginal en diferentes momentos, y apoyar análisis de despacho económico del sistema.
 
 ## Descripción del dataset
 
@@ -27,38 +27,35 @@ Cada registro corresponde a una observación en un intervalo de 15 minutos e inc
 
 Este dataset representa una vista concentrada del comportamiento horario del sistema eléctrico y permite correlacionar variables operacionales con el costo marginal observado.
 
-## Modelo seleccionado:
+## Enfoque del modelo:
 
-Se aplicará un enfoque de **regresión supervisada**, comenzando con una **regresión lineal múltiple** para establecer una línea base. Posteriormente se evaluará el desempeño de modelos más complejos como **KNN** y **Random Forest**, con el objetivo de capturar posibles no linealidades en los datos.
+Se implementaron y compararon tres algoritmos de clasificación:
 
-Preguntas guías para el análisis:
+1. K-Nearest Neighbors (KNN)
+    - Ventajas: Simple, no paramétrico, captura relaciones locales
+    - Configuración: Optimización del parámetro k mediante validación cruzada
+    - Resultados: Buen desempeño inicial pero sensible a escala de datos
 
-- ¿Podemos asociar el costo margianl al tipo de generación? ¿Qué tipo de generación está asociado a mayores o menores costos?
-  x = precio marginal de una barra  y = tipo de generación
+2. Árbol de Decisión
+    - Ventajas: Interpretable, maneja bien variables categóricas
+    - Configuración: Control de profundidad máxima para evitar overfitting
+    - Resultados: Proporciona reglas claras pero puede ser inestable
 
-- ¿Hay patrones horarios? ¿El costo es más alto en horas punta?
-  x = periodo  y = costo marginal
-
-- ¿Los cambios bruscos se relacionan con ciertos tipos de generación entrando o saliendo del sistema?
-  x = variación del costo marginal (∆ costo marginal) y = tipo de generación predominante
-
-- ¿El comportamiento es distinto los fines de semana?
-  x = día de la semana  y = costo marginal
-  
-- ¿Hay zonas del sistema donde el costo marginal es más alto?
-  x = nombre de la barra (ubicación)  y = costo marginal
-
-> El uso de regresión lineal permite una interpretación directa de la influencia de cada variable y un bajo costo computacional, ideal para una primera aproximación al problema.
+3. Random Forest
+    - Ventajas: Combina múltiples árboles, robusto a overfitting
+    - Configuración: 100 estimadores, profundidad máxima optimizada
+    - Resultados: Mejor desempeño general, captura relaciones no lineales
 
 ## Estrategia de evaluación
 
 Se utilizarán las siguientes métricas de desempeño para evaluar los modelos:
 
-- **MAE** (Mean Absolute Error)
-- **RMSE** (Root Mean Squared Error)
-- **R²** (Coeficiente de determinación)
+- **Accuracy** (Exactitud)
+- **Precision**, **Recall** y **F1-score** por clase
+- **Matriz de confusión**
+- **ROC-AUC** (para modelos probabilísticos)
 
-Además, se mantendrá una separación temporal entre datos de entrenamiento y prueba, evitando el uso de validación aleatoria, con el fin de simular un escenario real de predicción futura basada en datos históricos.
+Se implementará validación cruzada estratificada para asegurar que cada fold mantenga la distribución de clases, y se reservará un conjunto de prueba temporalmente separado para evaluar el desempeño en condiciones realistas.
 
 ## Datos
 
