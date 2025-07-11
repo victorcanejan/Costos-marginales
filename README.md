@@ -105,5 +105,6 @@ El modelo KNN alcanzó un accuracy del 63%, mientras que el árbol de decisión 
 
 El árbol de decisión tuvo mejores métricas generales (precision, recall y F1-score), lo que indica que logró una mejor separación entre clases. A pesar de eso, los dos modelos son útiles como primera aproximación y permiten entender qué tipos de generación son más distinguibles a partir de los datos disponibles.
 
+En ambos casos la precisión no supera el 70%, por lo que, a pesar de lograr clasificar de manera correcta una cantidad significativa de veces, los resultados aún dejan espacio para mejoras. Esto sugiere que podría ser útil probar con modelos más complejos o incorporar nuevas variables que capturen mejor las diferencias entre los tipos de generación. También sería interesante evaluar el impacto del desbalance de clases y aplicar técnicas de balanceo para mejorar el rendimiento en las categorías menos representadas.
 
 *Este proyecto representa una aplicación práctica de análisis predictivo en el contexto del mercado eléctrico chileno, con base en datos abiertos y una problemática de alto impacto operativo y económico.*
