@@ -67,7 +67,22 @@ Puedes descargarlo desde el siguiente enlace:
 
 Una vez descargado, colócalo en la raíz del proyecto (misma carpeta que este README).
 
----
+## Resultados:
+### Classification Report - KNN
+
+| Clase                  | Precision | Recall | F1-score | Support  |
+|------------------------|-----------|--------|----------|----------|
+| Fotovoltaico           | 0.69      | 0.76   | 0.72     | 551,775  |
+| Hidroeléctrica embalse | 0.45      | 0.34   | 0.39     | 23,823   |
+| Hidroeléctrica pasada  | 0.58      | 0.49   | 0.53     | 236,725  |
+| Térmica                | 0.56      | 0.54   | 0.55     | 288,083  |
+
+|                        | Precision | Recall | F1-score | Support   |
+|------------------------|-----------|--------|----------|-----------|
+| Accuracy               |           |        | 0.63     | 1,100,406 |
+| Macro avg              | 0.57      | 0.53   | 0.55     | 1,100,406 |
+| Weighted avg           | 0.63      | 0.63   | 0.63     | 1,100,406 |
+
 
 ## Conclusiones:
 El modelo KNN logró un desempeño aceptable en la clasificación del tipo de generación eléctrica, con una precisión general del 63%. Su mejor rendimiento fue en la clase fotovoltaico, con un F1-score de 0.72, lo que indica que el modelo identifica correctamente esta fuente en la mayoría de los casos.
