@@ -41,10 +41,6 @@ Se implementaron y compararon tres algoritmos de clasificación:
     - Configuración: Control de profundidad máxima para evitar overfitting
     - Resultados: Proporciona reglas claras pero puede ser inestable
 
-3. Random Forest
-    - Ventajas: Combina múltiples árboles, robusto a overfitting
-    - Configuración: 100 estimadores, profundidad máxima optimizada
-    - Resultados: Mejor desempeño general, captura relaciones no lineales
 
 ## Estrategia de evaluación
 
