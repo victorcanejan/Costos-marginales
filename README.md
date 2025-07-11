@@ -83,12 +83,27 @@ Una vez descargado, colócalo en la raíz del proyecto (misma carpeta que este R
 | Macro avg              | 0.57      | 0.53   | 0.55     | 1,100,406 |
 | Weighted avg           | 0.63      | 0.63   | 0.63     | 1,100,406 |
 
+### Decision Tree sin PCA
+| Clase                  | Precision | Recall | F1-score | Support |
+| ---------------------- | --------- | ------ | -------- | ------- |
+| Fotovoltaico           | 0.74      | 0.73   | 0.74     | 551,775 |
+| Hidroeléctrica embalse | 0.36      | 0.35   | 0.35     | 23,823  |
+| Hidroeléctrica pasada  | 0.54      | 0.51   | 0.53     | 236,725 |
+| Térmica                | 0.63      | 0.63   | 0.63     | 288,083 |
+
+|              | Precision | Recall | F1-score | Support   |
+| ------------ | --------- | ------ | -------- | --------- |
+| Accuracy     |           |        | 0.65     | 1,100,406 |
+| Macro avg    | 0.56      | 0.56   | 0.56     | 1,100,406 |
+| Weighted avg | 0.65      | 0.65   | 0.65     | 1,100,406 |
+
 
 ## Conclusiones:
-El modelo KNN logró un desempeño aceptable en la clasificación del tipo de generación eléctrica, con una precisión general del 63%. Su mejor rendimiento fue en la clase fotovoltaico, con un F1-score de 0.72, lo que indica que el modelo identifica correctamente esta fuente en la mayoría de los casos.
+Se aplicaron dos modelos de clasificación para predecir el tipo de generación eléctrica: KNN y árbol de decisión. Ambos entregaron resultados similares, aunque el árbol de decisión mostró un rendimiento levemente mejor.
 
-En cambio, la clase hidroeléctrica embalse presentó un rendimiento bajo, probablemente debido a la poca cantidad de datos disponibles para esa categoría, lo que limita el aprendizaje del modelo.
+El modelo KNN alcanzó un accuracy del 63%, mientras que el árbol de decisión logró un 65%. En ambos casos, la clase con mejor desempeño fue “fotovoltaico”, lo que sugiere que esta fuente tiene patrones más marcados o diferenciables. Por otro lado, “hidroeléctrica embalse” fue la clase más difícil de predecir, probablemente por la baja cantidad de ejemplos.
 
-El KNN tiende a confundirse entre clases cuando los valores de entrada son similares, lo que es una limitación conocida de este algoritmo. Aun así, funciona bien como modelo base y permite tener una primera aproximación a la clasificación del tipo de generación.
+El árbol de decisión tuvo mejores métricas generales (precision, recall y F1-score), lo que indica que logró una mejor separación entre clases. A pesar de eso, los dos modelos son útiles como primera aproximación y permiten entender qué tipos de generación son más distinguibles a partir de los datos disponibles.
+
 
 *Este proyecto representa una aplicación práctica de análisis predictivo en el contexto del mercado eléctrico chileno, con base en datos abiertos y una problemática de alto impacto operativo y económico.*
