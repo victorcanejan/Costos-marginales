@@ -69,4 +69,11 @@ Una vez descargado, colócalo en la raíz del proyecto (misma carpeta que este R
 
 ---
 
+## Conclusiones:
+El modelo KNN logró un desempeño aceptable en la clasificación del tipo de generación eléctrica, con una precisión general del 63%. Su mejor rendimiento fue en la clase fotovoltaico, con un F1-score de 0.72, lo que indica que el modelo identifica correctamente esta fuente en la mayoría de los casos.
+
+En cambio, la clase hidroeléctrica embalse presentó un rendimiento bajo, probablemente debido a la poca cantidad de datos disponibles para esa categoría, lo que limita el aprendizaje del modelo.
+
+El KNN tiende a confundirse entre clases cuando los valores de entrada son similares, lo que es una limitación conocida de este algoritmo. Aun así, funciona bien como modelo base y permite tener una primera aproximación a la clasificación del tipo de generación.
+
 *Este proyecto representa una aplicación práctica de análisis predictivo en el contexto del mercado eléctrico chileno, con base en datos abiertos y una problemática de alto impacto operativo y económico.*
